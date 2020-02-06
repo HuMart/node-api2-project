@@ -77,4 +77,23 @@ router.get('/:id', (req, res) => {
             res.status(500).json({ error: "The post information could not be retrieved." });
         });
 }) ;
+
+
+// get post/id/comments
+
+router.get('/:id/comments', (req, res) => {
+    const id = req.params.id;
+    
+
+    Posts.findPostComments(id)
+        .then(comments => {
+            console.log(comments);
+            res.status(200).json(comments)       
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: "The comments information could not be retrieved." });
+        })
+})
+
 module.exports = router;
