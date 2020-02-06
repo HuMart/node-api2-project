@@ -96,4 +96,16 @@ router.get('/:id/comments', (req, res) => {
         })
 })
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+
+    Posts.remove(id)
+        .then(deleted => {
+            res.status(200).json(deleted);            
+        })
+        .catch(err => {
+            res.status(500).json({ error: "The post could not be removed" });
+        })
+})
+
 module.exports = router;
